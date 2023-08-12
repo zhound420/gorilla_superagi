@@ -1,8 +1,10 @@
+from abc import ABC
 from superagi.tools.base_tool import BaseToolkit, BaseTool
 from typing import Type, List
+from gorilla_tool import GorillaTool
 
 # Defining the Gorilla LLM Toolkit
-class GorillaToolkit(BaseToolkit):
+class GorillaToolkit(BaseToolkit, ABC):
     name: str = "Gorilla LLM Toolkit"
     description: str = "Toolkit for Gorilla LLM"
     
