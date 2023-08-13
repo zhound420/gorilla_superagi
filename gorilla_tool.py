@@ -1,3 +1,4 @@
+import os
 import openai
 from superagi.tools.base_tool import BaseTool
 from pydantic import BaseModel, Field
