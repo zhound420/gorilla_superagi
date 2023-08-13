@@ -1,7 +1,7 @@
 from abc import ABC
 from superagi.tools.base_tool import BaseToolkit, BaseTool
 from typing import Type, List
-from superagi.tools.external_tools.gorilla_superagi.gorilla_tool import GorillaTool
+#from superagi.tools.external_tools.gorilla_superagi.gorilla_tool import GorillaTool
 
 # Defining the Gorilla LLM Toolkit
 class GorillaToolkit(BaseToolkit, ABC):
