@@ -1,6 +1,4 @@
-import os
-import requests
-
+import openai
 from superagi.tools.base_tool import BaseTool
 from pydantic import BaseModel, Field
 from typing import Type
@@ -17,23 +15,18 @@ class GorillaTool(BaseTool):
     
     def _execute(self, message: str = None):
         try:
-            response = self.interact_with_gorilla_llm(message)
-            processed_response = self.process_gorilla_response(response)
-            return processed_response
+            response = self.get_gorilla_response(message)
+            return response
         except Exception as e:
             return f"Error: {str(e)}"
 
-    def interact_with_gorilla_llm(self, input_message):
-        api_url = os.environ.get('GORILLA_LLM_API_ENDPOINT', 'http://34.132.127.197:8000/v1')
-        payload = {'message': input_message}
+    def get_gorilla_response(self, prompt):
+        model = "gorilla-7b-hf-v0"  # You can adjust this if needed
         try:
-            response = requests.post(api_url, json=payload)
-            response.raise_for_status()  # Raise an exception for HTTP errors
-            return response.json()
-        except requests.RequestException as e:
-            raise Exception(f"API Request Error: {str(e)}")
-
-    def process_gorilla_response(self, response):
-        if not response or 'result' not in response:
-            raise Exception("Invalid API response format")
-        return response.get('result', 'No result found')
+            completion = openai.ChatCompletion.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            return completion.choices[0].message.content
+        except Exception as e:
+            raise Exception(f"Gorilla LLM Error: {str(e)}")
