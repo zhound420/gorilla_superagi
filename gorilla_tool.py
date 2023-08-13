@@ -24,7 +24,7 @@ class GorillaTool(BaseTool):
             return f"Error: {str(e)}"
 
     def interact_with_gorilla_llm(self, input_message):
-        api_url = os.environ.get('GORILLA_LLM_API_ENDPOINT', 'https://default-gorilla-llm-api-endpoint.com/interact')
+        api_url = os.environ.get('GORILLA_LLM_API_ENDPOINT', 'http://zanino.millennium.berkeley.edu:8000/v1')
         payload = {'message': input_message}
         try:
             response = requests.post(api_url, json=payload)
