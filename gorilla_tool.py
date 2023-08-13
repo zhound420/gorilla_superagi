@@ -21,7 +21,7 @@ class GorillaTool(BaseTool):
             return f"Error: {str(e)}"
 
     def get_gorilla_response(self, prompt):
-        model = "gorilla-7b-hf-v1"  # You can adjust this if needed
+        model = "gorilla-7b-hf-delta-v1"  # You can adjust this if needed
         try:
             completion = openai.ChatCompletion.create(
                 model=model,
